@@ -1,0 +1,43 @@
+.timeSelectorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.toggleButtonGroup {
+  display: flex;
+  gap: 5px;
+}
+
+.timeButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  color: #000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.timeButtonSelected {
+  background-color: #e3f2fd;
+  color: #0078d7;
+}
+
+.addButton,
+.settingsButton {
+  margin-left: 10px;
+}
+
+.customTimeContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.customTimeInput {
+  width: 110px;
+}
