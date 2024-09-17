@@ -1,18 +1,28 @@
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { useTimer } from "react-timer-hook";
 import { Svg } from "../../assets/SvgAsset";
 import s from "./TimerMain.module.css";
 type TimerProps = {
   expiryTimestamp: Date;
+  totalDuration: number;
 };
-export const MyTimer = ({ expiryTimestamp }: TimerProps) => {
-  const { seconds, minutes, hours, isRunning, start, pause } = useTimer({
-    expiryTimestamp,
-    onExpire: () => console.warn("onExpire called"),
-  });
+export const MyTimer = ({ expiryTimestamp, totalDuration }: TimerProps) => {
+  const { seconds, minutes, hours, isRunning, start, pause, restart } =
+    useTimer({
+      expiryTimestamp,
+      onExpire: () => console.warn("onExpire called"),
+    });
 
-  const totalSeconds: number =
-    ((minutes * 60 + hours * 3600 + seconds) / 300) * 100;
+  const [totalTime, setTotalTime] = useState(totalDuration);
+
+  React.useEffect(() => {
+    setTotalTime(totalDuration);
+    restart(expiryTimestamp);
+  }, [expiryTimestamp, restart, totalDuration]);
+
+  const totalSeconds: number = minutes * 60 + hours * 3600 + seconds;
+  const progress = (totalSeconds / totalTime) * 100;
 
   return (
     <div className={s.container}>
@@ -20,12 +30,12 @@ export const MyTimer = ({ expiryTimestamp }: TimerProps) => {
         <Svg />
         <CircularProgress
           variant="determinate"
-          value={totalSeconds}
+          value={progress}
           size={250}
           className={s.gradientCircularProgress}
         />
         <Box className={s.textCentered}>
-          <Typography variant="h4" component={"div"} className={s.timerText}>
+          <Typography variant="h5" component={"div"} className={s.timerText}>
             {`${hours.toString().padStart(2, "0")}:
           ${minutes.toString().padStart(2, "0")}:
           ${seconds.toString().padStart(2, "0")}`}
@@ -33,11 +43,11 @@ export const MyTimer = ({ expiryTimestamp }: TimerProps) => {
         </Box>
       </Box>
       {isRunning ? (
-        <Button onClick={pause} variant="contained">
+        <Button onClick={pause} className={s.MuiButton} variant="contained">
           Pause
         </Button>
       ) : (
-        <Button onClick={start} variant="contained">
+        <Button onClick={start} className={s.MuiButton} variant="contained">
           Start
         </Button>
       )}

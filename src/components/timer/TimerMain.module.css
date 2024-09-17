@@ -1,37 +1,39 @@
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(
-    to top,
-    #f5f7fa,
-    #c3cfe2
-  ); /* Light gradient background */
+  justify-content: center;
+  min-height: 450px;
+  background-color: #2c2f33; /* Темный фон для фона приложения */
+  border-radius: 20px; /* Закругленные углы */
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Глубокая тень для объема */
 }
 
 .timerContainer {
   position: relative;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* Добавлен отступ снизу для кнопки */
 }
 
 .gradientCircularProgress {
   position: relative;
   z-index: 1;
-  color: transparent; /* To hide default color */
+  color: transparent; /* Убираем стандартный цвет */
   stroke-linecap: round;
 }
 
 .gradientCircularProgress circle {
-  stroke: url(#gradient); /* Apply the gradient from the SVG */
+  stroke: url(#gradient); /* Градиент для круга */
 }
 
 .textCentered {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +41,39 @@
 }
 
 .timerText {
-  font-size: 48px;
+  font-size: 36px; /* Оптимальный размер шрифта */
   font-weight: bold;
-  color: #333;
+  color: #ffffff; /* Светлый текст для контраста с темным фоном */
+}
+
+/* Стили для кнопки */
+.MuiButton {
+  background: linear-gradient(
+    145deg,
+    #56ccf2,
+    #2f80ed
+  ); /* Градиент для кнопки */
+  border-radius: 30px; /* Закруглённые углы */
+  color: #ffffff;
+  text-transform: none; /* Убираем верхний регистр текста */
+  font-size: 16px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Добавлена тень для кнопки */
+  transition: background 0.3s ease; /* Плавный переход при наведении */
+}
+
+.MuiButton:hover {
+  background: linear-gradient(
+    145deg,
+    #2f80ed,
+    #56ccf2
+  ); /* Изменение градиента на hover */
+}
+
+.MuiButton:active {
+  background: linear-gradient(
+    145deg,
+    #1e6ab3,
+    #285e8b
+  ); /* Более темные цвета при нажатии */
 }

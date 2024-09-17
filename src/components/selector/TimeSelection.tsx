@@ -30,6 +30,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 type TimeSelectorProps = {
   onTimeSelect: (timeInSeconds: number) => void;
 };
+
 export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
   const [selectedTime, setSelectedTime] = useState<number>(0);
   const [customTime, setCustomTime] = useState<string>("");
@@ -78,9 +79,23 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
             <ToggleButton
               key={time}
               value={time}
-              className={`${s.timeButton} ${
-                selectedTime === time ? s.timeButtonSelected : ""
-              }`}
+              sx={{
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                border: "1px solid #ddd",
+                fontWeight: "bold",
+                color: selectedTime === time ? "#ffeb3b" : "#fff",
+                backgroundColor:
+                  selectedTime === time ? "#2f80ed" : "transparent",
+                "&:hover": {
+                  backgroundColor: "#56ccf2",
+                  color: "#fff",
+                },
+              }}
+              // className={`${s.timeButton} ${
+              //   selectedTime === time ? s.timeButtonSelected : ""
+              // }`}
             >
               {time}
             </ToggleButton>
@@ -92,11 +107,17 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
         <Box className={s.customTimeContainer}>
           <TextField
             variant="outlined"
+            color="primary"
             size="small"
             value={customTime}
             onChange={(e) => setCustomTime(e.target.value)}
             placeholder="Enter time"
             className={s.customTimeInput}
+            sx={{
+              input: {
+                color: "#ffffff",
+              },
+            }}
           />
           <IconButton color="primary" onClick={handleAddTime}>
             <AddIcon />
