@@ -1,4 +1,5 @@
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import React, { useState } from "react";
 import { useTimer } from "react-timer-hook";
 import { Svg } from "../../assets/SvgAsset";
@@ -6,8 +7,13 @@ import s from "./TimerMain.module.css";
 type TimerProps = {
   expiryTimestamp: Date;
   totalDuration: number;
+  focusText: string;
 };
-export const MyTimer = ({ expiryTimestamp, totalDuration }: TimerProps) => {
+export const MyTimer = ({
+  expiryTimestamp,
+  totalDuration,
+  focusText,
+}: TimerProps) => {
   const { seconds, minutes, hours, isRunning, start, pause, restart } =
     useTimer({
       expiryTimestamp,
@@ -25,7 +31,7 @@ export const MyTimer = ({ expiryTimestamp, totalDuration }: TimerProps) => {
   const progress = (totalSeconds / totalTime) * 100;
 
   return (
-    <div className={s.container}>
+    <>
       <Box className={s.timerContainer}>
         <Svg />
         <CircularProgress
@@ -51,6 +57,24 @@ export const MyTimer = ({ expiryTimestamp, totalDuration }: TimerProps) => {
           Start
         </Button>
       )}
-    </div>
+      <Typography
+        variant="caption"
+        component="div"
+        sx={{
+          color: grey[600],
+          fontSize: "11px",
+          marginTop: "15px",
+        }}
+      >
+        Your Focusing on{" "}
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        component="div"
+        sx={{ color: "#fff", fontSize: "18px" }}
+      >
+        {focusText}
+      </Typography>
+    </>
   );
 };

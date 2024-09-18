@@ -1,10 +1,7 @@
-import AddIcon from "@mui/icons-material/Add";
 import {
   Box,
-  IconButton,
   Paper,
   styled,
-  TextField,
   ToggleButton,
   ToggleButtonGroup,
   toggleButtonGroupClasses,
@@ -33,12 +30,10 @@ type TimeSelectorProps = {
 
 export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
   const [selectedTime, setSelectedTime] = useState<number>(0);
-  const [customTime, setCustomTime] = useState<string>("");
-  const [isAddingCustomTime, setIsAddingCustomTime] = useState<boolean>(false);
 
-  const handleTimeChange = (
+  const buttonTimeChange = (
     event: React.MouseEvent<HTMLElement>,
-    newTime: number | null,
+    newTime: number,
   ) => {
     if (newTime !== null) {
       setSelectedTime(newTime);
@@ -46,18 +41,8 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
     }
   };
 
-  const handleAddTime = () => {
-    const time = parseInt(customTime, 10);
-    if (!isNaN(time) && time > 0) {
-      setSelectedTime(time);
-      setCustomTime("");
-      setIsAddingCustomTime(false);
-      onTimeSelect(time * 60);
-    }
-  };
-
   return (
-    <Box className={s.timeSelectorContainer}>
+    <Box>
       <Paper
         elevation={0}
         sx={(theme) => ({
@@ -71,7 +56,7 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
           size="small"
           value={selectedTime}
           exclusive
-          onChange={handleTimeChange}
+          onChange={buttonTimeChange}
           aria-label="text alignment"
           className={s.toggleButtonGroup}
         >
@@ -85,7 +70,7 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
                 borderRadius: "50%",
                 border: "1px solid #ddd",
                 fontWeight: "bold",
-                color: selectedTime === time ? "#ffeb3b" : "#fff",
+                color: selectedTime === time ? "#2f80ed" : "#fff",
                 backgroundColor:
                   selectedTime === time ? "#2f80ed" : "transparent",
                 "&:hover": {
@@ -93,59 +78,12 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
                   color: "#fff",
                 },
               }}
-              // className={`${s.timeButton} ${
-              //   selectedTime === time ? s.timeButtonSelected : ""
-              // }`}
             >
               {time}
             </ToggleButton>
           ))}
         </StyledToggleButtonGroup>
       </Paper>
-
-      {isAddingCustomTime ? (
-        <Box className={s.customTimeContainer}>
-          <TextField
-            variant="outlined"
-            size="small"
-            value={customTime}
-            onChange={(e) => setCustomTime(e.target.value)}
-            placeholder="Enter time"
-            sx={{
-              flex: 1,
-              padding: "10px 12px",
-              fontSize: "16px",
-              transition: "border-color 0.3s ease, box-shadow 0.3s ease",
-              "&:focus": {
-                borderColor: "#1976d2",
-                boxShadow: "0 0 8px rgba(25, 118, 210, 0.3)",
-              },
-              input: {
-                color: "#fff",
-              },
-            }}
-          />
-          <IconButton color="primary" onClick={handleAddTime}>
-            <AddIcon />
-          </IconButton>
-        </Box>
-      ) : (
-        <IconButton
-          onClick={() => setIsAddingCustomTime(true)}
-          sx={{
-            padding: "5px",
-            color: "#fff",
-            backgroundColor: "#2f80ed",
-            transition: "background-color 0.3s ease",
-            marginTop: "10px",
-            "&:hover": {
-              backgroundColor: "#56ccf2",
-            },
-          }}
-        >
-          <AddIcon />
-        </IconButton>
-      )}
     </Box>
   );
 };

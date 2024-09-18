@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FocusText } from "../focusText/FocusText";
+import { AddTime } from "../selector/HandleAddTime";
 import { TimeSelector } from "../selector/TimeSelection";
 import { MyTimer } from "../timer/TimerMain";
 import s from "./App.module.css";
@@ -7,6 +8,11 @@ import s from "./App.module.css";
 export default function App() {
   const [expiryTimestamp, setExpiryTimestamp] = useState<Date>(new Date());
   const [totalDuration, setTotalDuration] = useState<number>(900);
+  const [focusText, setFocusText] = useState<string>("Designing");
+
+  const handleFocusTextChange = (newText: string) => {
+    setFocusText(newText);
+  };
 
   const handleTimeSelect = (timeInSeconds: number) => {
     const time = new Date();
@@ -23,12 +29,16 @@ export default function App() {
   return (
     <div className={s.appContainer}>
       <div className={s.contentWrapper}>
-        <TimeSelector onTimeSelect={handleTimeSelect} />
-        <MyTimer
-          expiryTimestamp={expiryTimestamp}
-          totalDuration={totalDuration}
-        />
-        <FocusText />
+        <div className={s.containerSecondary}>
+          <TimeSelector onTimeSelect={handleTimeSelect} />
+          <AddTime onTimeSelect={handleTimeSelect} />
+          <MyTimer
+            expiryTimestamp={expiryTimestamp}
+            totalDuration={totalDuration}
+            focusText={focusText}
+          />
+          <FocusText text={focusText} onTextChange={handleFocusTextChange} />
+        </div>
       </div>
     </div>
   );

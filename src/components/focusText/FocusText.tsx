@@ -1,15 +1,35 @@
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
-import { IconButton, TextField } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  IconButton,
+  IconButtonProps,
+  styled,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
-import s from "./FocusText.module.css";
 
-export const FocusText = () => {
-  const [text, setText] = useState<string>("Designing");
+const EditButton = styled(IconButton)<IconButtonProps>(({ theme }) => ({
+  color: theme.palette.primary.main,
+  padding: "8px",
+  marginTop: "10px",
+  transition: "background-color 0.3s ease",
+  borderRadius: "10px",
+  "&:hover": {
+    color: "#56ccf2",
+  },
+}));
+type FocusTextProps = {
+  text: string;
+  onTextChange: (text: string) => void;
+};
+
+export const FocusText = ({ text, onTextChange }: FocusTextProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
+    onTextChange(event.target.value);
   };
 
   const handleEdit = () => {
@@ -24,59 +44,43 @@ export const FocusText = () => {
     }
   };
   return (
-    <div className={s.paper}>
-      <TextField
-        variant={isEditing ? "outlined" : "standard"}
-        label="Your focus here"
-        className={s.iputBase}
-        value={text}
-        onChange={handleChange}
-        onBlur={handleSave}
-        onKeyDown={handleKey}
-        onClick={!isEditing ? handleEdit : undefined}
-        color="primary"
-        focused
-        // placeholder="Add your focus here"
-        InputProps={{ readOnly: !isEditing }}
-        inputProps={{ "aria-label": "focus text" }}
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        transition: "all 0.4s ease",
+      }}
+    >
+      <FormControl
         sx={{
-          flex: 1,
-          marginRight: "3px",
-          padding: "2px 5px",
-          fontSize: "16px",
-          input: {
-            color: "#fff",
-          },
-        }}
-      />
-      <IconButton
-        color="primary"
-        onClick={handleEdit}
-        sx={{
-          padding: "8px",
-          color: "2f80ed",
-          transition: "background-color 0.3s ease",
-          borderRadius: "10px",
-          "&:hover": {
-            color: "#56ccf2",
-          },
+          width: isEditing ? "175px" : "0px",
+          overflow: "hidden",
+          paddingTop: "10px",
+          transition: "width 0.3s ease",
+          marginRight: isEditing ? "10px" : "0px",
         }}
       >
-        {isEditing ? (
-          <SaveIcon
-            sx={{
-              color: "#2f80ed",
-              padding: "8px",
-              transition: "background-color 0.3s ease",
-              "&:hover": {
-                color: "#56ccf2",
-              },
-            }}
-          />
-        ) : (
-          <EditIcon />
-        )}
-      </IconButton>
-    </div>
+        <TextField
+          focused={isEditing}
+          size="small"
+          label="Change Your Focus"
+          value={text}
+          onChange={handleChange}
+          onBlur={handleSave}
+          onKeyDown={handleKey}
+          onClick={!isEditing ? handleEdit : undefined}
+          placeholder="Add your focus here"
+          inputProps={{ readOnly: !isEditing }}
+          sx={{
+            input: {
+              color: "#fff",
+            },
+          }}
+        />
+      </FormControl>
+      <EditButton color="primary" onClick={handleEdit}>
+        {isEditing ? <SaveIcon /> : <EditIcon />}
+      </EditButton>
+    </Box>
   );
 };
