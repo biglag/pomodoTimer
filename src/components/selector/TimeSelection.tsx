@@ -89,7 +89,7 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
                 backgroundColor:
                   selectedTime === time ? "#2f80ed" : "transparent",
                 "&:hover": {
-                  backgroundColor: "#56ccf2",
+                  backgroundColor: "#2f80ed",
                   color: "#fff",
                 },
               }}
@@ -107,15 +107,21 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
         <Box className={s.customTimeContainer}>
           <TextField
             variant="outlined"
-            color="primary"
             size="small"
             value={customTime}
             onChange={(e) => setCustomTime(e.target.value)}
             placeholder="Enter time"
-            className={s.customTimeInput}
             sx={{
+              flex: 1,
+              padding: "10px 12px",
+              fontSize: "16px",
+              transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+              "&:focus": {
+                borderColor: "#1976d2",
+                boxShadow: "0 0 8px rgba(25, 118, 210, 0.3)",
+              },
               input: {
-                color: "#ffffff",
+                color: "#fff",
               },
             }}
           />
@@ -125,9 +131,17 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
         </Box>
       ) : (
         <IconButton
-          color="primary"
           onClick={() => setIsAddingCustomTime(true)}
-          className={s.addButton}
+          sx={{
+            padding: "5px",
+            color: "#fff",
+            backgroundColor: "#2f80ed",
+            transition: "background-color 0.3s ease",
+            marginTop: "10px",
+            "&:hover": {
+              backgroundColor: "#56ccf2",
+            },
+          }}
         >
           <AddIcon />
         </IconButton>

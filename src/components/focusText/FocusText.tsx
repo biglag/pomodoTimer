@@ -1,6 +1,6 @@
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
-import { Divider, IconButton, TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 import { useState } from "react";
 import s from "./FocusText.module.css";
 
@@ -40,14 +40,42 @@ export const FocusText = () => {
         InputProps={{ readOnly: !isEditing }}
         inputProps={{ "aria-label": "focus text" }}
         sx={{
+          flex: 1,
+          marginRight: "3px",
+          padding: "2px 5px",
+          fontSize: "16px",
           input: {
-            color: "#ffffff",
+            color: "#fff",
           },
         }}
       />
-      <Divider className={s.divider} orientation="vertical" />
-      <IconButton color="primary" className={s.iconButton} onClick={handleEdit}>
-        {isEditing ? <SaveIcon className={s.saveButton} /> : <EditIcon />}
+      <IconButton
+        color="primary"
+        onClick={handleEdit}
+        sx={{
+          padding: "8px",
+          color: "2f80ed",
+          transition: "background-color 0.3s ease",
+          borderRadius: "10px",
+          "&:hover": {
+            color: "#56ccf2",
+          },
+        }}
+      >
+        {isEditing ? (
+          <SaveIcon
+            sx={{
+              color: "#2f80ed",
+              padding: "8px",
+              transition: "background-color 0.3s ease",
+              "&:hover": {
+                color: "#56ccf2",
+              },
+            }}
+          />
+        ) : (
+          <EditIcon />
+        )}
       </IconButton>
     </div>
   );

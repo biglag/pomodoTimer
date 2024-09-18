@@ -6,7 +6,7 @@
   background-color: #2c2f33; /* Фон аналогичный вашему полю ввода */
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Более мягкая тень */
-  max-width: 240px; /* Аналогичная ширина */
+  max-width: 250px; /* Аналогичная ширина */
   margin: 0 auto;
   flex-direction: column;
 }
@@ -18,42 +18,10 @@
   background-color: #2c2f33;
 }
 
-.timeButton {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid #ddd;
-  color: #ffffff;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.timeButtonSelected {
-  background-color: linear-gradient(145deg, #56ccf2, #2f80ed);
-  color: white;
-}
-
 .customTimeContainer {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.customTimeInput {
-  flex: 1;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #2c2f33;
-  border-color: #56ccf2;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.customTimeInput:focus {
-  border-color: #1976d2;
-  box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
 }
 
 .addButton {
