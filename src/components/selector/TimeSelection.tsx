@@ -35,6 +35,7 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
     event: React.MouseEvent<HTMLElement>,
     newTime: number,
   ) => {
+    console.log(event.target);
     if (newTime !== null) {
       setSelectedTime(newTime);
       onTimeSelect(newTime * 60);
