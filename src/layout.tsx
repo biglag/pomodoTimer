@@ -1,8 +1,18 @@
-import App from "./components/app/App";
+import CustomApp from "./components/customApp/CustomApp";
+import FixedApp from "./components/fixedApp/FixedApp";
+import { usePomodoroStore } from "./state/UsePomodoroStore";
 export const Layout = () => {
+  const { currentComponent, toggleComponent } = usePomodoroStore();
+  const timerComplete = () => {
+    toggleComponent();
+  };
   return (
     <div>
-      <App />
+      {currentComponent === "CustomApp" ? (
+        <CustomApp onComplete={timerComplete} />
+      ) : (
+        <FixedApp onComplete={timerComplete} />
+      )}
     </div>
   );
 };

@@ -4,20 +4,24 @@ import React, { useState } from "react";
 import { useTimer } from "react-timer-hook";
 import { Svg } from "../../assets/SvgAsset";
 import s from "./TimerMain.module.css";
+
 type TimerProps = {
   expiryTimestamp: Date;
   totalDuration: number;
   focusText: string;
+  onComplete: () => void;
 };
+
 export const MyTimer = ({
   expiryTimestamp,
   totalDuration,
   focusText,
+  onComplete,
 }: TimerProps) => {
   const { seconds, minutes, hours, isRunning, start, pause, restart } =
     useTimer({
       expiryTimestamp,
-      onExpire: () => console.warn("onExpire called"),
+      onExpire: () => onComplete(),
     });
 
   const [totalTime, setTotalTime] = useState(totalDuration);

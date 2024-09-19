@@ -48,6 +48,7 @@ export const TimeSelector = ({ onTimeSelect }: TimeSelectorProps) => {
         sx={(theme) => ({
           display: "flex",
           border: `1.5px solid ${theme.palette.divider}`,
+          borderColor: "#2f80ed",
           flexWrap: "wrap",
         })}
       >

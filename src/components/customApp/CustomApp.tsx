@@ -5,9 +5,12 @@ import { TimeSelector } from "../selector/TimeSelection";
 import { MyTimer } from "../timer/TimerMain";
 import s from "./App.module.css";
 
-export default function App() {
+type CustomAppPorps = {
+  onComplete: () => void;
+};
+export default function CustomApp({ onComplete }: CustomAppPorps) {
   const [expiryTimestamp, setExpiryTimestamp] = useState<Date>(new Date());
-  const [totalDuration, setTotalDuration] = useState<number>(900);
+  const [totalDuration, setTotalDuration] = useState<number>(15 * 60);
   const [focusText, setFocusText] = useState<string>("Designing");
 
   const handleFocusTextChange = (newText: string) => {
@@ -20,9 +23,10 @@ export default function App() {
     setExpiryTimestamp(time);
     setTotalDuration(timeInSeconds);
   };
+
   useEffect(() => {
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 900);
+    time.setSeconds(time.getSeconds() + 15 * 60);
     setExpiryTimestamp(time);
   }, []);
 
@@ -36,6 +40,7 @@ export default function App() {
             expiryTimestamp={expiryTimestamp}
             totalDuration={totalDuration}
             focusText={focusText}
+            onComplete={onComplete}
           />
           <FocusText text={focusText} onTextChange={handleFocusTextChange} />
         </div>
