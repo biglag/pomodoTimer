@@ -48,6 +48,7 @@
 
 /* Стили для кнопки */
 .MuiButton {
+  display: flex;
   background: linear-gradient(
     145deg,
     #56ccf2,
@@ -58,7 +59,7 @@
   text-transform: none; /* Убираем верхний регистр текста */
   font-size: 16px;
   padding: 10px 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Добавлена тень для кнопки */
+  box-shadow: 0 4px 10px #0000004d; /* Добавлена тень для кнопки */
   transition: background 0.3s ease; /* Плавный переход при наведении */
 }
 
@@ -76,4 +77,22 @@
     #1e6ab3,
     #285e8b
   ); /* Более темные цвета при нажатии */
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-between; /* Равномерно распределяет кнопки по горизонтали */
+  gap: 10px; /* Отступ между кнопками */
+  margin-top: 20px; /* Отступ сверху, если нужно */
+  margin-left: 22%;
+}
+.skipButton {
+  border: 2px solid #2f80ed;
+  border-radius: 8px;
+  padding: 5px 1px;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px #0000004d;
+}
+.skipButton:hover {
+  border-color: #56ccf2;
+  color: #56ccf2;
 }

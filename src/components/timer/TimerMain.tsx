@@ -1,4 +1,11 @@
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { useState } from "react";
 import { useTimer } from "react-timer-hook";
@@ -52,15 +59,30 @@ export const MyTimer = ({
           </Typography>
         </Box>
       </Box>
-      {isRunning ? (
-        <Button onClick={pause} className={s.MuiButton} variant="contained">
-          Pause
-        </Button>
-      ) : (
-        <Button onClick={start} className={s.MuiButton} variant="contained">
-          Start
-        </Button>
-      )}
+      <Box className={s.buttonContainer}>
+        {isRunning ? (
+          <Button onClick={pause} className={s.MuiButton} variant="contained">
+            Pause
+          </Button>
+        ) : (
+          <Button onClick={start} className={s.MuiButton} variant="contained">
+            Start
+          </Button>
+        )}
+        {/* onClick={onComplete}
+          className={s.MuiButton}
+          variant="contained"
+          sx={{
+            weight: "5px",
+          }} */}
+        <IconButton
+          onClick={onComplete}
+          color="primary"
+          className={s.skipButton}
+        >
+          <SkipNextIcon />
+        </IconButton>
+      </Box>
       <Typography
         variant="caption"
         component="div"

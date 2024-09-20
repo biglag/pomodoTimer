@@ -1,10 +1,13 @@
+import { usePomodoroStore } from "../../state/UsePomodoroStore";
 import { MyTimer } from "../timer/TimerMain";
 import s from "./App.module.css";
 type CustomAppPorps = {
   onComplete: () => void;
 };
 export default function FixedApp({ onComplete }: CustomAppPorps) {
-  const sessionDuration: number = 5 * 60;
+  const { currentBreakType } = usePomodoroStore();
+  const sessionDuration: number =
+    currentBreakType === "short" ? 5 * 60 : 15 * 60;
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + sessionDuration);
@@ -16,7 +19,9 @@ export default function FixedApp({ onComplete }: CustomAppPorps) {
           <MyTimer
             expiryTimestamp={time}
             totalDuration={sessionDuration}
-            focusText={"Break"}
+            focusText={
+              currentBreakType === "short" ? "Short Break" : "Long Break"
+            }
             onComplete={onComplete}
           />
         </div>
